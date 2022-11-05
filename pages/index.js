@@ -58,9 +58,9 @@ const Index = () => {
           <label htmlFor="descricao">Descricao</label>
           <input type="text" name="descricao" onChange={onChange} />
           <label htmlFor="valorVenda">Valor de Venda</label>
-          <input type="number" step="0.01" name="valorVenda" onChange={onChange} />
+          <input type="number" step="9.99" name="valorVenda" onChange={onChange} />
           <label htmlFor="valorLocacao">Valor de Locação</label>
-          <input type="number" step="0.01" name="valorLocacao" onChange={onChange} />
+          <input type="number" step="9.99" name="valorLocacao" onChange={onChange} />
         </fieldset>
         <button type="submit" onClick={handleSubmit} >Salvar</button>
       </form>
