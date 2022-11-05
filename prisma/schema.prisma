@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model arquivos_imovel {
+  id             Int    @id @default(autoincrement())
+  id_imovel      Int
+  descricao      String @db.VarChar(45)
+  nomeArquivo    String @db.VarChar(120)
+  formatoArquivo String @db.VarChar(60)
+}
+
+model imovel {
+  id           Int      @id @default(autoincrement())
+  endereco     String   @db.VarChar(180)
+  descricao    String   @db.VarChar(250)
+  valorVenda   Decimal? @db.Decimal(10, 0)
+  valorLocacao Decimal? @db.Decimal(10, 0)
+}
+
+model proprietario {
+  id    Int     @id @db.UnsignedInt
+  nome  String  @db.VarChar(120)
+  email String  @db.VarChar(120)
+  cpf   String? @db.VarChar(14)
+}
