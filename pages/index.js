@@ -2,6 +2,7 @@ import useSWR from 'swr'
 import React, { useState } from 'react'
 import { fetcher2 } from '../src/utils/defaults'
 import { mutation } from '../src/utils/mutation'
+import { PropertySelect } from '../src/components/PropertySelect'
 
 
 const url = '/api/graphql'
@@ -51,6 +52,7 @@ const Index = () => {
       <h1>GraphQL</h1>
       <pre>{JSON.stringify(imoveis, null, 2)}</pre>
 
+      <PropertySelect parentRef={{mutate}} ></PropertySelect>
       <form>
         <fieldset style={{"display": "flex", "flexDirection": "column", "width": "25rem"}}>
           <label htmlFor="endereco">Endereço</label>
