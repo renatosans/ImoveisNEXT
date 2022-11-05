@@ -23,6 +23,7 @@ export const PropertySelect = ({parentRef}) => {
         .then( (response) => {
             mutate() // atualiza as opções do dropdown
             parentRef.mutate() // atualiza o componente pai
+            imoveis ? setSelected(imoveis.data.getImoveis[0].id) : selected(0)
         })
         .catch((error) => console.error(error))
     }
