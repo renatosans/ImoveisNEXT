@@ -20,7 +20,8 @@ export const PropertySelect = ({imoveis, parentRef }) => {
         <>
             <select onChange={(e) => setSelected(e.target.value)} >{
                 imoveis ?
-                imoveis.data.getImoveis.map( (imovel) => <option value={imovel.id} key={imovel.id}>{imovel.endereco}</option> ) :
+                imoveis.data.getImoveis.map( (imovel) => 
+                    <option value={imovel.id} key={imovel.id} selected={imovel.id == selected}>{imovel.endereco}</option> ) :
                 <option value={0} key={0} >Nenhum imóvel encontrado</option>
             }
             </select>
