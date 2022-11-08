@@ -9,6 +9,7 @@ const url = '/api/graphql'
 const query = `
   query {
     getImoveis {
+      id
       endereco
       descricao
       valorVenda
@@ -52,7 +53,7 @@ const Index = () => {
       <h1>GraphQL</h1>
       <pre>{JSON.stringify(imoveis, null, 2)}</pre>
 
-      <PropertySelect parentRef={{mutate}} ></PropertySelect>
+      <PropertySelect imoveis={imoveis} parentRef={{mutate}} ></PropertySelect>
       <form>
         <fieldset style={{"display": "flex", "flexDirection": "column", "width": "25rem"}}>
           <label htmlFor="endereco">Endereço</label>
