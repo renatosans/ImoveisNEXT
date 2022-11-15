@@ -1,9 +1,18 @@
+import ReactDom from 'react-dom'
 import React, { useState } from 'react'
+import PropertyForm from './PropertyForm'
 import { mutation } from '../utils/mutation'
 
 
 export const PropertySelect = ({imoveis, parentRef }) => {
     const [selected, setSelected] = useState(0);
+
+    const updateImovel = () => {
+        const root = ReactDom.createRoot(document.getElementById('panel'));
+
+        const propertyForm = React.createElement(PropertyForm, { id: parseInt(selected), parentRef: parentRef }, null);
+        root.render(propertyForm);
+    }
 
     const deleteImovel = () => {
         // const message = 'Deseja realmente excluir o imóvel ?';
@@ -25,7 +34,8 @@ export const PropertySelect = ({imoveis, parentRef }) => {
                 <option value={0} key={0} >Nenhum imóvel encontrado</option>
             }
             </select>
-            <button onClick={deleteImovel} >Retirar do Site</button>
+            <button onClick={updateImovel} style={{"margin-left": "0.5rem"}}>Editar</button>
+            <button onClick={deleteImovel} style={{"margin-left": "0.5rem"}}>Excluir</button>
         </>
     )
 }

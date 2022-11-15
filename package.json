@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.14",
     "@prisma/client": "^4.5.0",
     "apollo-server-micro": "^3.10.3",
     "axios": "^1.1.3",

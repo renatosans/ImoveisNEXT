@@ -12,7 +12,8 @@ type Imovel {
 }
 
 extend type Query {
-    getImoveis: [Imovel!]!
+  getImovel(id: Int): Imovel
+  getImoveis: [Imovel!]!
 }
 
 extend type Mutation {
@@ -24,8 +25,11 @@ extend type Mutation {
 
 const resolvers = {
     Query: {
+      getImovel: (parent, args) => {
+        return prisma.imovel.findUnique({ where: { id: parseInt(args.id) }, })
+      },
       getImoveis: () => {
-        return prisma.imovel.findMany();
+        return prisma.imovel.findMany()
       }
     },
 
