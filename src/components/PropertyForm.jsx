@@ -1,7 +1,9 @@
 import { request } from '../utils/request'
 import { mutation } from '../utils/mutation'
+import { notification} from '../utils/defaults'
 import { useState, useEffect } from 'react'
 import { Button, Dialog } from '@mui/material'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 export default function PropertyForm({id, parentRef}) {
@@ -29,14 +31,25 @@ const onChange = (e) => {
 }
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  mutation(`createImovel`, imovel)
-  .then( (response) => {
-    parentRef.mutate() // atualiza a lista de imóveis
-    close()
-  })
-  .catch((error) => console.error(error))
+    if (imovel.endereco === "" || imovel.descricao === "" || imovel.valorVenda === "") {
+      toast.error('Alguns campos obrigatórios não foram preenchidos!', notification.options);
+      return;
+    }
+
+    let operation = `createImovel`
+    let variables = imovel
+    if (Number.isInteger(id)) {
+      operation = `updateImovel`
+      variables = {...imovel, id: parseInt(id)}
+    }
+    mutation(operation, variables)
+    .then( (response) => {
+      parentRef.mutate() // atualiza a lista de imóveis
+      close()
+    })
+    .catch((error) => toast.error(error.message, notification.options))
 }
 
 useEffect(() => {
@@ -56,6 +69,8 @@ useEffect(() => {
 
 return (
 <>
+    <Toaster />
+
     <Dialog open={open} onClose={close} >
         <form>
           <fieldset style={{"display": "flex", "flexDirection": "column", "width": "25rem"}}>

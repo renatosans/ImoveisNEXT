@@ -4,7 +4,7 @@ import PropertyForm from './PropertyForm'
 import { mutation } from '../utils/mutation'
 
 
-export const PropertySelect = ({imoveis, parentRef }) => {
+export default function PropertySelect({imoveis, parentRef }) {
     const [selected, setSelected] = useState(0);
 
     const updateImovel = () => {
@@ -34,8 +34,8 @@ export const PropertySelect = ({imoveis, parentRef }) => {
                 <option value={0} key={0} >Nenhum imóvel encontrado</option>
             }
             </select>
-            <button onClick={updateImovel} style={{"margin-left": "0.5rem"}}>Editar</button>
-            <button onClick={deleteImovel} style={{"margin-left": "0.5rem"}}>Excluir</button>
+            <button onClick={updateImovel} style={{"marginLeft": "0.5rem"}}>Editar</button>
+            <button onClick={deleteImovel} style={{"marginLeft": "0.5rem"}}>Excluir</button>
         </>
     )
 }

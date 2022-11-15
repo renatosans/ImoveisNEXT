@@ -19,7 +19,7 @@ extend type Query {
 extend type Mutation {
   createImovel(endereco: String, descricao: String, valorVenda: Float, valorLocacao: Float): Int
   deleteImovel(id: Int): Int
-  # updateImovel(id: Int): Int
+  updateImovel(id: Int, endereco: String, descricao: String, valorVenda: Float, valorLocacao: Float): Int
 }
 `
 
@@ -40,6 +40,10 @@ const resolvers = {
       },
       deleteImovel: async (parent, args) => {
         const imovel = await prisma.imovel.delete({ where: { id: parseInt(args.id) }, })
+        return imovel.id;
+      },
+      updateImovel: async (parent, args) => {
+        const imovel = await prisma.imovel.update({data: args})
         return imovel.id;
       },
     }
