@@ -17,7 +17,7 @@ extend type Query {
 extend type Mutation {
   createProprietario(nome: String, email: String, cpf: String): Int
   deleteProprietario(id: Int): Int
-  # updateProprietario(id: Int): Int
+  updateProprietario(id: Int, nome: String, email: String, cpf: String): Int
 }
 `
 
@@ -35,6 +35,10 @@ const resolvers = {
       },
       deleteProprietario: async (parent, args) => {
         const proprietario = await prisma.proprietario.delete({ where: { id: parseInt(args.id) }, })
+        return proprietario.id;
+      },
+      updateProprietario: async (parent, args) => {
+        const proprietario = await prisma.proprietario.update({ where: { id: parseInt(args.id) }, data: args })
         return proprietario.id;
       },
     }
