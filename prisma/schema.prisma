@@ -19,8 +19,8 @@ model imovel {
   id           Int      @id @default(autoincrement())
   endereco     String   @db.VarChar(180)
   descricao    String   @db.VarChar(250)
-  valorVenda   Decimal? @db.Decimal(10, 0)
-  valorLocacao Decimal? @db.Decimal(10, 0)
+  valorVenda   Decimal? @db.Decimal(10, 2)
+  valorLocacao Decimal? @db.Decimal(10, 2)
 }
 
 model proprietario {
