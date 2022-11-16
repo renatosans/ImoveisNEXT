@@ -20,6 +20,13 @@ const [imovel, setImovel] = useState({
   "valorLocacao": 0.01
 })
 
+function fixDecimalPlaces(num) {
+  const decimalPlaces = num % 1
+  if (decimalPlaces == 0) return num + 0.01 // faz a coreção do tipo
+
+  return num;
+}
+
 const onChange = (e) => {
   if (e.target.type === 'number') {
     // fixa em 2 casas decimais o valor do campo, API GraphQL fortemente tipada
