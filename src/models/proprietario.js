@@ -11,6 +11,7 @@ type Proprietario {
 }
 
 extend type Query {
+  getProprietario(id: Int): Proprietario
   getProprietarios: [Proprietario!]!
 }
 
@@ -23,6 +24,9 @@ extend type Mutation {
 
 const resolvers = {
     Query: {
+      getProprietario: (parent, args) => {
+        return prisma.proprietario.findUnique({ where: { id: parseInt(args.id) }, })
+      },
       getProprietarios: () => {
         return prisma.proprietario.findMany();
       }
