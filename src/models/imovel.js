@@ -43,7 +43,7 @@ const resolvers = {
         return imovel.id;
       },
       updateImovel: async (parent, args) => {
-        const imovel = await prisma.imovel.update({data: args})
+        const imovel = await prisma.imovel.update({ where: { id: parseInt(args.id) }, data: args })
         return imovel.id;
       },
     }
