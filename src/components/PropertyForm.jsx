@@ -20,13 +20,6 @@ const [imovel, setImovel] = useState({
   "valorLocacao": 0.01
 })
 
-function fixDecimalPlaces(num) {
-  const decimalPlaces = num % 1
-  if (decimalPlaces == 0) return num + 0.01 // faz a coreção do tipo
-
-  return num;
-}
-
 const onChange = (e) => {
   if (e.target.type === 'number') {
     // fixa em 2 casas decimais o valor do campo, API GraphQL fortemente tipada
@@ -59,6 +52,13 @@ const handleSubmit = async (e) => {
     .catch((error) => toast.error(error.message, notification.options))
 }
 
+function fixDecimalPlaces(num) {
+  const decimalPlaces = num % 1
+  if (decimalPlaces == 0) return num + 0.01
+
+  return num;
+}
+
 useEffect(() => {
     if (id) {
         // const url = '/api/graphql'
@@ -69,7 +69,13 @@ useEffect(() => {
             valorLocacao
         }`
         request(query)
-        .then((response) => setImovel(response.data.data.getImovel))
+        .then((response) => {
+          // faz a coerção do tipo, API GraphQL fortemente tipada
+          let dadosImovel = response.data.data.getImovel;
+          dadosImovel[`valorVenda`] = fixDecimalPlaces(dadosImovel[`valorVenda`]);
+          dadosImovel[`valorLocacao`] = fixDecimalPlaces(dadosImovel[`valorLocacao`]);
+          setImovel(dadosImovel)
+        })
         .catch((error) => toast.error(error, notification.options))
     }
 }, []);
